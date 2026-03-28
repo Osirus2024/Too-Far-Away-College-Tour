@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campus Tour 2026 — OSU Cowboys</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --osu-orange: #FF6600;
+    --osu-black: #1a1a1a;
+    --osu-dark: #0d0d0d;
+    --osu-gold: #C8A951;
+    --osu-orange-dim: rgba(255,102,0,0.15);
+    --osu-orange-mid: rgba(255,102,0,0.35);
+    --card-bg: #1e1e1e;
+    --card-border: rgba(255,102,0,0.2);
+    --text-primary: #f0ede8;
+    --text-muted: #9a9490;
+    --text-dim: #6b6660;
+    --warn-bg: rgba(255,180,0,0.1);
+    --warn-border: rgba(255,180,0,0.4);
+    --green: #4caf7d;
+    --yellow: #f5b942;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--osu-dark);
+    color: var(--text-primary);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── HERO ─────────────────────────────────────────── */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    background: var(--osu-black);
+  }
+
+  .hero-stripe {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 4px;
+    background: repeating-linear-gradient(90deg, var(--osu-orange) 0, var(--osu-orange) 60px, var(--osu-black) 60px, var(--osu-black) 80px);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 52px 24px 36px;
+    text-align: center;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--osu-orange);
+    margin-bottom: 10px;
+  }
+
+  .hero-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: clamp(38px, 8vw, 72px);
+    line-height: 1.0;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    margin-bottom: 6px;
+  }
+  .hero-title span { color: var(--osu-orange); }
+
+  .hero-sub {
+    font-size: 15px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    margin-bottom: 32px;
+  }
+
+  /* Pistol Pete SVG badge */
+  .pete-badge {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 28px;
+  }
+  .pete-badge svg { filter: drop-shadow(0 0 18px rgba(255,102,0,0.5)); }
+
+  /* ── COUNTDOWN ─────────────────────────────────────── */
+  .countdown-wrap {
+    display: flex;
+    justify-content: center;
+    gap: clamp(8px, 3vw, 24px);
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+
+  .cd-block {
+    background: rgba(255,102,0,0.08);
+    border: 1px solid rgba(255,102,0,0.25);
+    border-radius: 10px;
+    padding: 14px 20px 10px;
+    min-width: 72px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cd-block::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--osu-orange);
+    opacity: 0.6;
+  }
+
+  .cd-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(28px, 6vw, 46px);
+    font-weight: 700;
+    color: var(--osu-orange);
+    display: block;
+    line-height: 1;
+    transition: transform 0.15s ease;
+  }
+  .cd-num.tick { transform: scale(1.12); }
+
+  .cd-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: block;
+    margin-top: 4px;
+  }
+
+  /* Crew cards */
+  .crew-section {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    border-top: 1px solid rgba(255,102,0,0.15);
+    padding-top: 24px;
+  }
+  .crew-group { text-align: center; }
+  .crew-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--osu-orange);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .crew-names {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .crew-names span {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  /* ── NAV TABS ───────────────────────────────────────── */
+  .tab-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13,13,13,0.96);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,102,0,0.2);
+  }
+  .tab-nav-inner {
+    display: flex;
+    max-width: 900px;
+    margin: 0 auto;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 0 12px;
+  }
+  .tab-nav-inner::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 14px 18px 12px;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .tab-btn:hover { color: var(--text-primary); }
+  .tab-btn.active {
+    color: var(--osu-orange);
+    border-bottom-color: var(--osu-orange);
+  }
+  .tab-day-num {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: inherit;
+    opacity: 0.7;
+    margin-bottom: 2px;
+  }
+
+  /* ── CONTENT ────────────────────────────────────────── */
+  .content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px 16px 60px;
+  }
+
+  .day-section { display: none; }
+  .day-section.active { display: block; }
+
+  /* ── WEATHER BAR ────────────────────────────────────── */
+  .weather-bar {
+    background: rgba(255,102,0,0.06);
+    border: 1px solid rgba(255,102,0,0.15);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-muted);
+    min-height: 44px;
+  }
+  .weather-icon { font-size: 20px; }
+  .weather-temp {
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px;
+    color: var(--osu-orange);
+    font-weight: 600;
+  }
+  .weather-desc { color: var(--text-primary); font-weight: 500; }
+
+  /* ── TIMELINE ───────────────────────────────────────── */
+  .timeline { position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--osu-orange) 0%, rgba(255,102,0,0.2) 100%);
+  }
+
+  .tl-item {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 0 16px;
+    margin-bottom: 20px;
+  }
+
+  .tl-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--osu-orange);
+    border: 2px solid var(--osu-dark);
+    margin-top: 16px;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    box-shadow: 0 0 8px rgba(255,102,0,0.5);
+    justify-self: center;
+  }
+  .tl-dot.minor {
+    width: 10px;
+    height: 10px;
+    background: var(--osu-black);
+    border-color: rgba(255,102,0,0.5);
+    box-shadow: none;
+    margin-top: 18px;
+  }
+
+  /* ── CARDS ──────────────────────────────────────────── */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .card + .card { margin-top: 12px; }
+
+  .card-time {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--osu-orange);
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .card-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title .icon {
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .card-body { font-size: 15px; color: var(--text-primary); }
+  .card-body p { margin-bottom: 8px; }
+  .card-body p:last-child { margin-bottom: 0; }
+  .card-body strong { color: #fff; font-weight: 600; }
+
+  /* Confirmation rows */
+  .conf-list { margin-top: 10px; }
+  .conf-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 7px 0;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    font-size: 14px;
+  }
+  .conf-row:first-child { border-top: none; }
+
+  .badge {
+    font-size: 10px;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  .badge-confirmed {
+    background: rgba(76,175,125,0.15);
+    color: var(--green);
+    border: 1px solid rgba(76,175,125,0.3);
+  }
+  .badge-tbc {
+    background: rgba(245,185,66,0.1);
+    color: var(--yellow);
+    border: 1px solid rgba(245,185,66,0.3);
+  }
+
+  .conf-name {
+    font-weight: 600;
+    color: #fff;
+    min-width: 60px;
+  }
+  .conf-detail { color: var(--text-muted); flex: 1; }
+
+  /* Warning callout */
+  .warn-card {
+    background: var(--warn-bg);
+    border: 1px solid var(--warn-border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--text-primary);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .warn-icon { font-size: 16px; flex-shrink: 0; padding-top: 1px; }
+
+  /* Action buttons */
+  .action-links {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid rgba(255,102,0,0.4);
+    color: var(--osu-orange);
+    background: rgba(255,102,0,0.06);
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .action-btn:hover {
+    background: rgba(255,102,0,0.15);
+    border-color: var(--osu-orange);
+  }
+
+  /* Alt options list */
+  .alt-list {
+    margin-top: 8px;
+    padding-left: 0;
+    list-style: none;
+  }
+  .alt-list li {
+    padding: 4px 0 4px 16px;
+    border-left: 2px solid rgba(255,102,0,0.3);
+    margin-bottom: 4px;
+    font-size: 14px;
+    color: var(--text-primary);
+  }
+  .alt-list strong { color: var(--osu-orange); }
+
+  /* Section header */
+  .section-hd {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin: 28px 0 12px;
+    padding-left: 56px;
+  }
+  .section-hd:first-of-type { margin-top: 0; }
+
+  /* ── ACTION ITEMS PANEL ────────────────────────────── */
+  .action-panel {
+    background: linear-gradient(135deg, rgba(255,102,0,0.08) 0%, rgba(255,102,0,0.03) 100%);
+    border: 1px solid rgba(255,102,0,0.3);
+    border-radius: 14px;
+    padding: 20px 22px;
+    margin-top: 32px;
+  }
+  .action-panel-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--osu-orange);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .action-item {
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    font-size: 15px;
+  }
+  .action-item:first-of-type { border-top: none; }
+  .action-bullet {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--osu-orange);
+    margin-top: 8px;
+    flex-shrink: 0;
+  }
+
+  /* ── OSU FOOTER ─────────────────────────────────────── */
+  .footer {
+    text-align: center;
+    padding: 24px 16px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    border-top: 1px solid rgba(255,102,0,0.1);
+  }
+  .footer span { color: var(--osu-orange); }
+
+  /* ── MOBILE ─────────────────────────────────────────── */
+  @media (max-width: 600px) {
+    .timeline::before { left: 15px; }
+    .tl-item { grid-template-columns: 32px 1fr; gap: 0 12px; }
+    .tl-dot { margin-top: 15px; }
+    .section-hd { padding-left: 44px; }
+    .card { padding: 14px 14px; }
+    .hero-content { padding: 40px 16px 28px; }
+    .cd-block { padding: 10px 14px 8px; min-width: 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<header class="hero">
+  <div class="hero-stripe"></div>
+  <div class="hero-content">
+
+    <div class="pete-badge">
+      <img src="pistol-pete.jpg" alt="Pistol Pete" style="width:110px;height:110px;object-fit:contain;filter:drop-shadow(0 0 18px rgba(255,102,0,0.55));">
+    </div>
+
+    <div class="hero-eyebrow">Too Far Away College Tour</div>
+    <h1 class="hero-title">Auburn <span>&</span> UGA</h1>
+    <p class="hero-sub">April 1 – 4, 2026 &nbsp;·&nbsp; Fort Worth → Auburn → Athens → Atlanta → Home</p>
+
+    <!-- Countdown -->
+    <div class="countdown-wrap">
+      <div class="cd-block"><span class="cd-num" id="cd-days">--</span><span class="cd-label">Days</span></div>
+      <div class="cd-block"><span class="cd-num" id="cd-hours">--</span><span class="cd-label">Hours</span></div>
+      <div class="cd-block"><span class="cd-num" id="cd-mins">--</span><span class="cd-label">Min</span></div>
+      <div class="cd-block"><span class="cd-num" id="cd-secs">--</span><span class="cd-label">Sec</span></div>
+    </div>
+
+    <!-- Crew -->
+    <div class="crew-section">
+      <div class="crew-group">
+        <span class="crew-label">The Ladies</span>
+        <div class="crew-names">
+          <span>Annabelle</span>
+          <span>Lilly</span>
+          <span>Lindsey</span>
+          <span>Mary Wesley</span>
+        </div>
+      </div>
+      <div class="crew-group">
+        <span class="crew-label">The Old Men</span>
+        <div class="crew-names">
+          <span>Brian</span>
+          <span>Kyle</span>
+          <span>Prichard</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════ TABS ═══════════════════ -->
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="switchDay(0)">
+      <span class="tab-day-num">Wed · Apr 1</span>
+      Travel Day
+    </button>
+    <button class="tab-btn" onclick="switchDay(1)">
+      <span class="tab-day-num">Thu · Apr 2</span>
+      Auburn
+    </button>
+    <button class="tab-btn" onclick="switchDay(2)">
+      <span class="tab-day-num">Fri · Apr 3</span>
+      UGA + ATL
+    </button>
+    <button class="tab-btn" onclick="switchDay(3)">
+      <span class="tab-day-num">Sat · Apr 4</span>
+      Fly Home
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════════ CONTENT ═══════════════════ -->
+<main class="content">
+
+  <!-- ─── DAY 1 ─── -->
+  <div class="day-section active" id="day-0">
+    <div class="weather-bar" id="wx-auburn">
+      <span class="weather-icon">🌤</span>
+      <span id="wx-auburn-text" style="color:var(--text-muted)">Loading Auburn weather...</span>
+    </div>
+
+    <div class="timeline">
+
+      <p class="section-hd">Departure</p>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="card">
+          <span class="card-time">2:29 PM CT · DFW</span>
+          <div class="card-title"><span class="icon">✈️</span> Depart Dallas/Fort Worth</div>
+          <div class="card-body">
+            <p>AA 1051 — All 3 families on this flight</p>
+            <div class="conf-list">
+              <div class="conf-row">
+                <span class="badge badge-confirmed">Confirmed</span>
+                <span class="conf-name">SMITH</span>
+                <span class="conf-detail">GJQHHW · Seats 10D/10E/10F</span>
+              </div>
+              <div class="conf-row">
+                <span class="badge badge-tbc">TBC</span>
+                <span class="conf-name">BEVIS</span>
+                <span class="conf-detail">Confirmation pending</span>
+              </div>
+              <div class="conf-row">
+                <span class="badge badge-tbc">TBC</span>
+                <span class="conf-name">KRAFFT</span>
+                <span class="conf-detail">Confirmation pending</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="card">
+          <span class="card-time">5:35 PM ET · ATL</span>
+          <div class="card-title"><span class="icon">🛬</span> Arrive Atlanta</div>
+          <div class="card-body">
+            <p>Gate T12 · Hartsfield-Jackson</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot minor"></div>
+        <div class="card">
+          <span class="card-time">~6:00 PM ET</span>
+          <div class="card-title"><span class="icon">🚗</span> Pick Up Rental Car</div>
+          <div class="card-body">
+            <p>Hertz @ ATL · Medium Sedan (Kia K4 or similar)</p>
+            <p>Smiths in their rental · Prichard & Lindsey riding with the Kraffts</p>
+            <div class="conf-list">
+              <div class="conf-row">
+                <span class="badge badge-confirmed">Confirmed</span>
+                <span class="conf-name">SMITH</span>
+                <span class="conf-detail">L48423174A8 · Pickup Apr 1 3:00 PM · Return Apr 4 11:00 AM</span>
+              </div>
+              <div class="conf-row">
+                <span class="badge badge-tbc">TBC</span>
+                <span class="conf-name">KRAFFT</span>
+                <span class="conf-detail">Rental pending</span>
+              </div>
+            </div>
+            <div class="action-links">
+              <a href="https://maps.apple.com/?q=Hartsfield+Jackson+Atlanta+International+Airport+Rental+Car+Center" class="action-btn">📍 Maps</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="section-hd">Evening</p>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="card">
+          <span class="card-time">7:00 PM CT · Auburn</span>
+          <div class="card-title"><span class="icon">🍽</span> Dinner at Acre</div>
+          <div class="card-body">
+            <p>Reservation for 7 (all families)</p>
+            <p>210 E Glenn Ave, Auburn, AL 36830</p>
+            <div class="warn-card">
+              <span class="warn-icon">⚠️</span>
+              <span>With a 5:35 ATL arrival + drive, you may arrive late. Consider pushing to 7:30/8:00 or have the Bevis crew hold the table.</span>
+            </div>
+            <div class="action-links">
+              <a href="https://maps.apple.com/?q=Acre+Auburn+AL" class="action-btn">📍 Maps</a>
+              <a href="tel:+13342466042" class="action-btn">📞 Call</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot minor"></div>
+        <div class="card">
+          <span class="card-time">After Dinner</span>
+          <div class="card-title"><span class="icon">🏨</span> Check In — Graduate by Hilton Auburn</div>
+          <div class="card-body">
+            <p>202 W Magnolia Ave, Auburn, AL 36830</p>
+            <p>Check-in from 4:00 PM · Check-out 11:00 AM</p>
+            <div class="conf-list">
+              <div class="conf-row">
+                <span class="badge badge-confirmed">Confirmed</span>
+                <span class="conf-name">SMITH</span>
+                <span class="conf-detail">3405203729 · Hilton# 1221493685 (Silver) · Apr 1–3</span>
+              </div>
+              <div class="conf-row">
+                <span class="badge badge-tbc">TBC</span>
+                <span class="conf-name">BEVIS</span>
+                <span class="conf-detail">Confirmation pending</span>
+              </div>
+              <div class="conf-row">
+                <span class="badge badge-tbc">TBC</span>
+                <span class="conf-name">KRAFFT</span>
+                <span class="conf-detail">Confirmation pending</span>
+              </div>
+            </div>
+            <div class="action-links">
+              <a href="https://maps.apple.com/?q=Graduate+by+Hilton+Auburn+AL" class="action-btn">📍 Maps</a>
+              <a href="tel:+13347524100" class="action-btn">📞 Call</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /timeline -->
+  </div><!-- /day-0 -->
+
+  <!-- ─── DAY 2 ─── -->
+  <div class="day-section" id="day-1">
+    <div class="weather-bar" id="wx-auburn2">
+      <span class="weather-icon">🌤</span>
+      <span id="wx-auburn2-text" style="color:var(--text-muted)">Loading Auburn weather...</span>
+    </div>
+
+    <div class="timeline">
+
+      <p class="section-hd">Morning</p>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="card">
+          <span class="card-time">8:30 – 10:30 AM CT</span>
+          <div class="card-title"><span class="icon">🎓</span> General Campus Tour (Smiths)</div>
+          <div class="card-body">
+            <p>Lettermen's Lounge — East Side of Jordan-Hare Stadium</p>
+            <p>~2 hours · Bevis/Krafft doing the 10:30 tour</p>
+            <div class="action-links">
+              <a href="https://maps.apple.com/?q=Jordan+Hare+Stadium+Auburn+AL" class="action-btn">📍 Maps</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot minor"></div>
+        <div class="card">
+          <span class="card-time">10:30 AM – 12:30 PM</span>
+          <div class="card-title"><span class="icon">🕐</span> Free Time (~2 hrs)</div>
+          <div class="card-body">
+            <p>Bevis/Krafft group on their general tour during this window</p>
+            <ul class="alt-list">
+              <li><strong>Toomer's Corner & Toomer's Drugs</strong> — iconic Auburn landmark, famous lemonade</li>
+              <li><strong>Samford Hall</strong> — the postcard photo op, 5-min walk</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <p class="section-hd">Afternoon</p>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="card">
+          <span class="card-time">12:30 – 2:00 PM</span>
+          <div class="card-title"><span class="icon">🍽</span> Lunch at Hey Day Market</div>
+          <div class="card-body">
+            <p>Multi-concept food hall — 9 vendors, full bar, coffee roastery</p>
+            <p>Group plan (all families)</p>
+            <div class="action-links">
+              <a href="https://maps.apple.com/?q=Hey+Day+Market+Auburn+AL" class="action-btn">📍 Maps</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="card">
+          <span class="card-time">2:00 – 3:00 PM</span>
+          <div class="card-title"><span class="icon">🏫</span> Harbert College of Business Tour</div>
+          <div class="card-body">
+            <p>Benoski Family Courtyard — between Lowder Hall & Horton-Hardgrave Hall</p>
+            <p>425 W Magnolia Ave, Auburn, AL 36849</p>
+            <p>Wait in courtyard until ambassador greets you</p>
+            <div class="action-links">
+              <a href="https://maps.apple.com/?q=Harbert+College+of+Business+Auburn+University" class="action-btn">📍 Maps</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot minor"></div>
+        <div class="card">
+          <span class="card-time">3:00 – 5:00 PM</span>
+          <div class="card-title"><span class="icon">🕐</span> Free Time (~2 hrs)</div>
+          <div class="card-body">
+            <ul class="alt-list">
+              <li><strong>Rec & Wellness Center tours</strong> — walk-up, every 30 min. 240k sq ft, "looks like a resort"</li>
+              <li><strong>Walk downtown Auburn / College St</strong> — boutiques, bookstores, campus vibe</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <p class="section-hd">Evening</p>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="card">
+          <span class="card-time">Evening</span>
+          <div class="card-title"><span class="icon">🍽</span> Dinner at The Hound</div>
+          <div class="card-body">
+            <p>Reservation for 3 · May expand to 7 (depends on Rainey Green situation)</p>
+            <div class="warn-card">
+              <span class="warn-icon">⚠️</span>
+              <div>
+                <p style="margin-bottom:6px">If NOT expanding to 7, alternate options:</p>
+                <ul class="alt-list">
+                  <li><strong>Hamilton's on Magnolia</strong> — upscale steaks, top-rated in Auburn</li>
+                  <li><strong>The Depot</strong> — gulf seafood in a restored train station</li>
+                  <li><strong>Botanic</strong> — inventive menu, strong local buzz</li>
+                  <li><strong>Amsterdam Cafe</strong> — casual, beer-forward, good burgers</li>
+                </ul>
+              </div>
+            </div>
+            <div class="action-links">
+              <a href="https://maps.apple.com/?q=The+Hound+Auburn+AL" class="action-btn">📍 Maps</a>
+              <a href="tel:+13348877775" class="action-btn">📞 Call</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /day-1 -->
+
+  <!-- ─── DAY 3 ─── -->
+  <div class="day-section" id="day-2">
+    <div class="weather-bar" id="wx-athens">
+      <span class="weather-icon">🌤</span>
+      <span id="wx-athens-text" style="color:var(--text-muted)">Loading Athens weather...</span>
+    </div>
+
+    <div class="timeline">
+
+      <p class="section-hd">Morning — Auburn Checkout</p>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="card">
+          <span class="card-time">~9:00 AM CT / 10:00 AM ET</span>
+          <div class="card-title"><span class="icon">🏨</span> Check Out Graduate by Hilton</div>
+          <div class="card-body">
+            <p>Early checkout — you need the head start. Official check-out is 11 AM but leave by 9 CT.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot minor"></div>
+        <div class="card">
+          <span class="card-time">~9:00 AM CT</span>
+          <div class="card-title"><span class="icon">🚗</span> Drive Auburn → Athens, GA</div>
+          <div class="card-body">
+            <p>~3 hours via I-85 through Atlanta</p>
+            <p><strong>Note:</strong> Auburn is CT, Athens is ET — you lose 1 hour</p>
+            <div class="action-links">
+              <a href="https://maps.apple.com/?daddr=Athens+GA&saddr=Auburn+AL" class="action-btn">📍 Navigate</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="section-hd">Afternoon — UGA</p>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="card">
+          <span class="card-time">1:00 – 3:00 PM ET</span>
+          <div class="card-title"><span class="icon">🎓</span> UGA Campus Tour</div>
+          <div class="card-body">
+            <p>Per Prichard's plan — confirm registration with UGA admissions</p>
+            <div class="warn-card">
+              <span class="warn-icon">⚠️</span>
+              <span>Tour time from Prichard's text only — not yet confirmed with UGA. Verify registration.</span>
+            </div>
+            <div class="action-links">
+              <a href="https://maps.apple.com/?q=University+of+Georgia+Visitors+Center+Athens" class="action-btn">📍 Maps</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot minor"></div>
+        <div class="card">
+          <span class="card-time">3:00 – 5:00 PM ET</span>
+          <div class="card-title"><span class="icon">🕐</span> Free Time in Athens (~2 hrs)</div>
+          <div class="card-body">
+            <ul class="alt-list">
+              <li><strong>Downtown Athens / Five Points</strong> — heart of UGA social life, shops, restaurants</li>
+              <li><strong>Sanford Stadium</strong> — walk the exterior, "Between the Hedges." 92K-seat cathedral</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <p class="section-hd">Drive to Atlanta</p>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="card">
+          <span class="card-time">~5:00 PM ET</span>
+          <div class="card-title"><span class="icon">🚗</span> Drive Athens → Atlanta</div>
+          <div class="card-body">
+            <p>~1.5 hours to downtown ATL</p>
+            <div class="action-links">
+              <a href="https://maps.apple.com/?daddr=Moxy+Atlanta+Downtown&saddr=Athens+GA" class="action-btn">📍 Navigate</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="card">
+          <span class="card-time">~6:30 PM ET</span>
+          <div class="card-title"><span class="icon">🏨</span> Check In — Moxy Atlanta Downtown</div>
+          <div class="card-body">
+            <p>329 Marietta St NW, Atlanta, GA 30313</p>
+            <div class="conf-list">
+              <div class="conf-row">
+                <span class="badge badge-confirmed">Confirmed</span>
+                <span class="conf-name">SMITH</span>
+                <span class="conf-detail">Conf# 83701397</span>
+              </div>
+              <div class="conf-row">
+                <span class="badge badge-tbc">TBC</span>
+                <span class="conf-name">BEVIS</span>
+                <span class="conf-detail">Confirmation pending</span>
+              </div>
+            </div>
+            <div class="action-links">
+              <a href="https://maps.apple.com/?q=Moxy+Atlanta+Downtown+329+Marietta+St+NW" class="action-btn">📍 Maps</a>
+              <a href="tel:+14709036699" class="action-btn">📞 Call</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot minor"></div>
+        <div class="card">
+          <span class="card-time">~8:00 PM ET · ATL</span>
+          <div class="card-title"><span class="icon">✈️</span> Krafft Family Departs ATL → DFW</div>
+          <div class="card-body">
+            <div class="conf-list">
+              <div class="conf-row">
+                <span class="badge badge-tbc">TBC</span>
+                <span class="conf-name">KRAFFT</span>
+                <span class="conf-detail">AA flight TBC</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="section-hd">Dinner</p>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="card">
+          <span class="card-time">Evening</span>
+          <div class="card-title"><span class="icon">🍽</span> Dinner in Atlanta</div>
+          <div class="card-body">
+            <p>Bevis family dining with Prichard's sister — if invited, join them. Otherwise:</p>
+            <ul class="alt-list">
+              <li><strong>Alma Cocina</strong> — Latin, upscale-casual, right downtown. Good cocktails</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /day-2 -->
+
+  <!-- ─── DAY 4 ─── -->
+  <div class="day-section" id="day-3">
+    <div class="weather-bar" id="wx-atl">
+      <span class="weather-icon">🌤</span>
+      <span id="wx-atl-text" style="color:var(--text-muted)">Loading Atlanta weather...</span>
+    </div>
+
+    <div class="timeline">
+
+      <p class="section-hd">Morning</p>
+
+      <div class="tl-item">
+        <div class="tl-dot minor"></div>
+        <div class="card">
+          <span class="card-time">Morning — Free until ~10:30 AM</span>
+          <div class="card-title"><span class="icon">🕐</span> Free Time (~2.5 hrs)</div>
+          <div class="card-body">
+            <p>Moxy is right in downtown — everything is walkable</p>
+            <ul class="alt-list">
+              <li><strong>Waffle House</strong> — you're in Georgia. It's mandatory 🧇</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="card">
+          <span class="card-time">11:01 AM ET · ATL</span>
+          <div class="card-title"><span class="icon">✈️</span> Bevis Family Departs ATL → DFW</div>
+          <div class="card-body">
+            <p>AA flight TBC · Arrives DFW ~12:40 PM CT</p>
+            <div class="conf-list">
+              <div class="conf-row">
+                <span class="badge badge-tbc">TBC</span>
+                <span class="conf-name">BEVIS</span>
+                <span class="conf-detail">Confirmation pending</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="section-hd">Head Home</p>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="card">
+          <span class="card-time">~10:30 AM ET</span>
+          <div class="card-title"><span class="icon">🚗</span> Depart for ATL Airport</div>
+          <div class="card-body">
+            <p>~20 min from Moxy · Hertz rental due back by 11:00 AM</p>
+            <p><strong>SMITH</strong> Hertz Conf: L48423174A8</p>
+            <div class="action-links">
+              <a href="https://maps.apple.com/?daddr=Hartsfield+Jackson+Airport+Rental+Car+Center&saddr=329+Marietta+St+NW+Atlanta+GA" class="action-btn">📍 Navigate</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="card">
+          <span class="card-time">2:19 PM ET · ATL</span>
+          <div class="card-title"><span class="icon">✈️</span> Depart Atlanta → DFW</div>
+          <div class="card-body">
+            <p>AA 3275 · Seats 15D / 15E / 15F</p>
+            <div class="conf-list">
+              <div class="conf-row">
+                <span class="badge badge-confirmed">Confirmed</span>
+                <span class="conf-name">SMITH</span>
+                <span class="conf-detail">GJQHHW · Seats 15D/15E/15F</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="card">
+          <span class="card-time">3:55 PM CT · DFW</span>
+          <div class="card-title"><span class="icon">🛬</span> Arrive Dallas/Fort Worth</div>
+          <div class="card-body">
+            <p>Gate D7 · Terminal D</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ─── ACTION ITEMS ─── -->
+    <div class="action-panel">
+      <div class="action-panel-title">
+        📋 Action Items
+      </div>
+      <div class="action-item">
+        <div class="action-bullet"></div>
+        <span><strong>Confirm UGA tour registration</strong> — 1:00 PM Friday with UGA admissions</span>
+      </div>
+      <div class="action-item">
+        <div class="action-bullet"></div>
+        <span><strong>Acre dinner timing</strong> — push to 7:30/8:00 given ATL arrival?</span>
+      </div>
+      <div class="action-item">
+        <div class="action-bullet"></div>
+        <span><strong>The Hound Thu</strong> — 3 or 7? (Rainey Green question)</span>
+      </div>
+      <div class="action-item">
+        <div class="action-bullet"></div>
+        <span><strong>Friday dinner</strong> — joining Bevis family + sister or own plans?</span>
+      </div>
+      <div class="action-item">
+        <div class="action-bullet"></div>
+        <span><strong>YPO outreach</strong> — Atlanta Regional YPO, awaiting response for inside connections</span>
+      </div>
+    </div>
+
+  </div><!-- /day-3 -->
+
+</main>
+
+<!-- ─── FOOTER ─── -->
+<footer class="footer">
+  <span>SMITH · BEVIS · KRAFFT</span> — Auburn & UGA 2026 — <span>Go Pokes</span>
+</footer>
+
+<script>
+// ── COUNTDOWN ──────────────────────────────────────────
+const target = new Date('2026-04-01T14:29:00-05:00');
+const nums = {
+  d: document.getElementById('cd-days'),
+  h: document.getElementById('cd-hours'),
+  m: document.getElementById('cd-mins'),
+  s: document.getElementById('cd-secs')
+};
+let prevSec = null;
+
+function tick() {
+  const now = new Date();
+  const diff = target - now;
+  if (diff <= 0) {
+    ['d','h','m','s'].forEach(k => nums[k].textContent = '00');
+    return;
+  }
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  nums.d.textContent = String(d).padStart(2,'0');
+  nums.h.textContent = String(h).padStart(2,'0');
+  nums.m.textContent = String(m).padStart(2,'0');
+  nums.s.textContent = String(s).padStart(2,'0');
+  if (s !== prevSec) {
+    nums.s.classList.add('tick');
+    setTimeout(() => nums.s.classList.remove('tick'), 150);
+    prevSec = s;
+  }
+}
+tick();
+setInterval(tick, 1000);
+
+// ── TAB SWITCHING ──────────────────────────────────────
+function switchDay(idx) {
+  document.querySelectorAll('.day-section').forEach((s, i) => {
+    s.classList.toggle('active', i === idx);
+  });
+  document.querySelectorAll('.tab-btn').forEach((b, i) => {
+    b.classList.toggle('active', i === idx);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── WEATHER ────────────────────────────────────────────
+const WX_SPOTS = [
+  { id: 'wx-auburn-text',  lat: 32.6099, lon: -85.4808, label: 'Auburn' },
+  { id: 'wx-auburn2-text', lat: 32.6099, lon: -85.4808, label: 'Auburn' },
+  { id: 'wx-athens-text',  lat: 33.9519, lon: -83.3576, label: 'Athens' },
+  { id: 'wx-atl-text',     lat: 33.7490, lon: -84.3880, label: 'Atlanta' },
+];
+
+const WX_CODES = {
+  0:'Clear', 1:'Mostly Clear', 2:'Partly Cloudy', 3:'Overcast',
+  45:'Fog', 48:'Icy Fog', 51:'Light Drizzle', 53:'Drizzle', 55:'Heavy Drizzle',
+  61:'Light Rain', 63:'Rain', 65:'Heavy Rain', 71:'Light Snow', 73:'Snow', 75:'Heavy Snow',
+  80:'Showers', 81:'Heavy Showers', 95:'Thunderstorms', 99:'Severe Thunderstorms'
+};
+const WX_ICONS = {
+  0:'☀️', 1:'🌤', 2:'⛅', 3:'☁️', 45:'🌫', 48:'🌫', 51:'🌦', 53:'🌦', 55:'🌧',
+  61:'🌧', 63:'🌧', 65:'🌧', 71:'🌨', 73:'🌨', 75:'🌨', 80:'🌦', 81:'🌧', 95:'⛈', 99:'⛈'
+};
+
+async function loadWeather(spot) {
+  try {
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${spot.lat}&longitude=${spot.lon}&current=temperature_2m,weathercode&temperature_unit=fahrenheit&timezone=auto`;
+    const r = await fetch(url);
+    const d = await r.json();
+    const temp = Math.round(d.current.temperature_2m);
+    const code = d.current.weathercode;
+    const desc = WX_CODES[code] || 'Weather';
+    const icon = WX_ICONS[code] || '🌤';
+    const el = document.getElementById(spot.id);
+    if (el) {
+      const bar = el.closest('.weather-bar');
+      if (bar) {
+        bar.querySelector('.weather-icon').textContent = icon;
+        el.innerHTML = `<span class="weather-temp">${temp}°F</span>&nbsp;&nbsp;<span class="weather-desc">${desc}</span>&nbsp;<span style="color:var(--text-muted);font-size:13px">· ${spot.label}</span>`;
+      }
+    }
+  } catch(e) {
+    const el = document.getElementById(spot.id);
+    if (el) el.textContent = 'Weather unavailable';
+  }
+}
+WX_SPOTS.forEach(loadWeather);
+</script>
+
+</body>
+</html>
